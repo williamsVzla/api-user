@@ -23,6 +23,10 @@ public enum ErrorCatalogue {
             "e",
             "La contraseña debe ser Una Mayuscula, letras minúsculas, y dos numeros",
             HttpStatus.BAD_REQUEST),
+	ERROR_CONSULTA(
+            "e",
+            "El usuario que intenta actualizar no existe",
+            HttpStatus.BAD_REQUEST),
 	ERROR_ACTUALIZAR(
             "e",
             "El usuario que intenta actualizar no existe",

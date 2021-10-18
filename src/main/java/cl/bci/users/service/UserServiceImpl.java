@@ -38,12 +38,10 @@ public class UserServiceImpl implements UserService {
 		
 		
 		if(!ValidateUtil.validaEmail(email)) {
-			log.info("errorrro");
 			throw new UserException(ErrorCatalogue.CORREO_INVALIDO.getCode());
 		}
 		
 		if(!ValidateUtil.validaPassword(password)) {
-			log.info("clave");
 			throw new UserException(ErrorCatalogue.CLAVE_NO_VALIDA.getCode());
 		}
 		
@@ -61,7 +59,12 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User obtenerPorId(String id) {
 		log.info("Iniciando consultar usuario");
-		return userDao.obtenerPorId(id);
+		User user = userDao.obtenerPorId(id);
+		
+		if(user == null) {
+			throw new UserException(ErrorCatalogue.ERROR_CONSULTA.getCode());
+		}
+		return user;
 	}
 	
 	@Override
