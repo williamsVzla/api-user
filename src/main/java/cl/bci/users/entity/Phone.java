@@ -13,10 +13,13 @@ import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.Data;
+
 @Entity
 @Table(name = "PHONE")
+@Data
 public class Phone {
-	
+
 	@Id
 	@GeneratedValue(generator = "UUID")
     @GenericGenerator(
@@ -24,7 +27,8 @@ public class Phone {
         strategy = "org.hibernate.id.UUIDGenerator"
     )
     @Column(name = "ID", updatable = false, nullable = false)
-	String idPHONE;
+	@JsonIgnore
+	String id;
 
 	@Column(name = "NUMBER")
 	String number;
@@ -39,4 +43,5 @@ public class Phone {
 	@JoinColumn(name = "USER_ID")
 	@JsonIgnore
 	User user;
+
 }

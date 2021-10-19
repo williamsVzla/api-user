@@ -24,12 +24,12 @@ import lombok.extern.slf4j.Slf4j;
  */
 @RestController
 @Slf4j
+
 @RequestMapping("/user")
 public class UserController {
 	
 	@Autowired
 	private UserService userService;
-
 	
 	@PostMapping
 	public User crear(@RequestBody User user) throws Exception {
@@ -55,7 +55,7 @@ public class UserController {
 		return userService.obtenerTodos();
 	}
 	
-	@GetMapping("id")
+	@GetMapping("obtenerPorId")
 	public User obtenerPorId(@RequestParam(name = "id") String id) throws Exception {
 		log.info("Iniciando ver usuario por id");
 		return userService.obtenerPorId(id);

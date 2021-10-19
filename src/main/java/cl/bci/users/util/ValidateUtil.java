@@ -5,13 +5,13 @@ import java.util.regex.Pattern;
 
 public class ValidateUtil {
 	
-	private static final String REGEX_EMAIL = "^([0-9a-zA-Z]+[-._+&])*[0-9a-zA-Z]+@([-0-9a-zA-Z]+[.])+[a-zA-Z]{2,3}$";
-	private static final String REGEX_PASSWORD = "^([0-9a-zA-Z]+[-._+&])*[0-9a-zA-Z]+@([-0-9a-zA-Z]+[.])+[a-zA-Z]{2,3}$";
+	private static final String REGEX_EMAIL = "^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$";
+	private static final String REGEX_PASSWORD = "^(?=.*?\\d.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{6,}$";
 	
 	public static Boolean validaEmail (String email) {
 		Pattern pattern = Pattern.compile(REGEX_EMAIL);
 		Matcher matcher = pattern.matcher(email);
-		return matcher.find();
+		return matcher.matches();
 	}
 	
 	public static Boolean validaPassword (String password) {

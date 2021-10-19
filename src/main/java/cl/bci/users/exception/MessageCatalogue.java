@@ -5,56 +5,60 @@ import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 
-public enum ErrorCatalogue {
+public enum MessageCatalogue {
 	
 	CORREO_INVALIDO(
-            "EEE",
+            "1",
             "Correo invalido",
             HttpStatus.BAD_REQUEST),
 	CORREO_OBLIGATORIO(
-            "e",
+            "2",
             "Correo es obligatorio",
             HttpStatus.BAD_REQUEST),
 	CORREO_REGISTRADO(
-            "d",
+            "3",
             "El correo ya registrado",
             HttpStatus.BAD_REQUEST),
 	CLAVE_NO_VALIDA(
-            "e",
+            "4",
             "La contraseña debe ser Una Mayuscula, letras minúsculas, y dos numeros",
             HttpStatus.BAD_REQUEST),
 	ERROR_CONSULTA(
-            "e",
+            "5",
             "El usuario que intenta actualizar no existe",
-            HttpStatus.BAD_REQUEST),
+            HttpStatus.OK),
 	ERROR_ACTUALIZAR(
-            "e",
+            "6",
             "El usuario que intenta actualizar no existe",
-            HttpStatus.BAD_REQUEST),
+            HttpStatus.OK),
 	ERROR_ELIMINAR(
-            "eeer",
+            "7",
             "El usuario que intenta eliminar no existe",
+            HttpStatus.OK),
+	ERROR_JSON(
+            "8",
+            "El request no es formato JSON",
             HttpStatus.BAD_REQUEST);
 
-    private static Map<String, ErrorCatalogue> map = new HashMap<>();
+    private static Map<String, MessageCatalogue> map = new HashMap<>();
     String code;
     String message;
     private HttpStatus httpStatus;
 
 
-    ErrorCatalogue(String code, String message, HttpStatus httpStatus) {
+    MessageCatalogue(String code, String message, HttpStatus httpStatus) {
         this.code = code;
         this.message = message;
         this.httpStatus = httpStatus;
     }
 
     static {
-        for (ErrorCatalogue cod : ErrorCatalogue.values()) {
+        for (MessageCatalogue cod : MessageCatalogue.values()) {
             map.put(cod.code, cod);
         }
     }
 
-    public static ErrorCatalogue getCode(String cod) {
+    public static MessageCatalogue getCode(String cod) {
         return map.get(cod);
     }
 

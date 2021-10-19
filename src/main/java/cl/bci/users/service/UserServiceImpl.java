@@ -2,15 +2,13 @@ package cl.bci.users.service;
 
 import java.util.Date;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import cl.bci.users.dao.UserDAO;
+import cl.bci.users.dao.UserDAOImpl;
 import cl.bci.users.entity.User;
-import cl.bci.users.exception.ErrorCatalogue;
+import cl.bci.users.exception.MessageCatalogue;
 import cl.bci.users.exception.UserException;
 import cl.bci.users.util.EncryptUtil;
 import cl.bci.users.util.ValidateUtil;
@@ -27,7 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 public class UserServiceImpl implements UserService {
 	
 	@Autowired
-	private UserDAO userDao;
+	private UserDAOImpl userDao;
 
 	@Override
 	public User crear(User user) throws Exception {
@@ -38,11 +36,11 @@ public class UserServiceImpl implements UserService {
 		
 		
 		if(!ValidateUtil.validaEmail(email)) {
-			throw new UserException(ErrorCatalogue.CORREO_INVALIDO.getCode());
+			throw new UserException(MessageCatalogue.CORREO_INVALIDO.getCode());
 		}
 		
 		if(!ValidateUtil.validaPassword(password)) {
-			throw new UserException(ErrorCatalogue.CLAVE_NO_VALIDA.getCode());
+			throw new UserException(MessageCatalogue.CLAVE_NO_VALIDA.getCode());
 		}
 		
 		validarEmailRegistrado(email);
@@ -62,7 +60,7 @@ public class UserServiceImpl implements UserService {
 		User user = userDao.obtenerPorId(id);
 		
 		if(user == null) {
-			throw new UserException(ErrorCatalogue.ERROR_CONSULTA.getCode());
+			throw new UserException(MessageCatalogue.ERROR_CONSULTA.getCode());
 		}
 		return user;
 	}
@@ -107,7 +105,7 @@ public class UserServiceImpl implements UserService {
 		Long cantidad = userDao.obtenerPorEmail(email);
 		
 		if(cantidad > 0) {
-			throw new UserException(ErrorCatalogue.CORREO_REGISTRADO.getCode());
+			throw new UserException(MessageCatalogue.CORREO_REGISTRADO.getCode());
 		}
 	}
 	

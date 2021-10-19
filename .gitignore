@@ -3,6 +3,7 @@
 .vscode/
 .classpath
 .sts4-cache/
+.gradle/
 target/
 bin/
 .idea/
